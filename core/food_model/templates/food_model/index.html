@@ -1,0 +1,59 @@
+{% extends 'food_model/base.html' %}
+
+{% load static %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block content %}
+<div class="flex flex-col xl:flex-row justify-between items-center">
+  <div class="order-2 xl:order-1 flex items-center mt-16">
+    <!-- <img src="{% static 'images/brooke-lark-lcZ9NxhOSlo-unsplash.jpg' %}" alt="loading" class="w-full xl:w-1/2 xl:absolute bottom-0 rounded-xl border-2 border-white" height="100" width="100"> -->
+  </div>
+  <div class="order-1 xl:order-2 mt-6 xl:mt-28 xl:ml-10">
+    <div class="px-3">
+      <h1 class="text-5xl font-semibold leading-normal text-orange-500">Swiggy!..<br></h1><br>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit est adipisci soluta commodi harum aperiam, eligendi facere nihil quidem doloremque quia debitis aut itaque deserunt! Architecto nobis magni nulla molestiae.</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-20">
+  <div class="flex items-center mt-32">
+    <h1 class="text-5xl font-semibold leading-normal text-orange-500">Contact Us</h1>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-3 grid-flow-dense-row mt-10">
+    <div class="text-center xl:text-left">
+      <img src="{% static 'images/location.png' %}" alt="img" height="50" width="50">
+      Address
+    </div>
+    <div class="text-center xl:text-left mt-4 xl:mt-0">
+      <img src="{% static 'images/phone.png' %}" alt="img" height="50" width="50">
+      Phone
+    </div>
+    <div class="text-center xl:text-left mt-4 xl:mt-0">
+      <img src="{% static 'images/email.png' %}" alt="img" height="50" width="50">E-Mail
+    </div>
+  </div>
+
+  <div class="mt-15">
+    <div class="flex flex-col xl:flex-row justify-between">
+      <div class="mt-6 xl:mt-28 xl:w-1/2">
+        <div class="px-3">
+          <h1 class="text-5xl font-semibold leading-normal text-orange-500">About Us<br></h1><br>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit est adipisci soluta commodi harum aperiam, eligendi facere nihil quidem doloremque quia debitis aut itaque deserunt! Architecto nobis magni nulla molestiae.</p>
+          {% if request.user.is_authenticated and not user.is_superuser %}
+            <a href="{% url 'food_model:owner_form' %}"><button class="mt-5 p-2 bg-orange-300">Register as a Shop Owner.</button></a>
+          {% endif %}
+          {% if user.is_superuser %}
+          <a href="{% url 'food_model:admin_views' %}"><button type="button" class="bg-orange-300 p-2">Admin View</button></a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="order-1 xl:order-2 xl:flex items-center mt-6 xl:mt-32 w-full">
+        <!-- <img src="{% static 'images/food1.avif' %}" alt="loading" class="w-full h-full xl:w-1/2 xl:absolute bottom-0 rounded-xl border-2 border-white" height="50" width="50">  -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

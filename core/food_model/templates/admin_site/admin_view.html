@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin View</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl text-center mb-8 text-orange-400 font-semibold">Admin View</h2>
+    <div class="bg-white rounded-xl shadow-xl p-4">
+      {% for restaurant in pending %}
+        <div class="mb-4 border-b border-gray-300 pb-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="restaurant_name" class="block font-semibold">Restaurant Name:</label>
+              <input id="restaurant_name" name="restaurant_name" value="{{ restaurant.restaurant_name }}" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 px-3 py-2">
+            </div>
+            <div>
+              <label for="owner_name" class="block font-semibold">Owner Name:</label>
+              <input id="owner_name" name="owner_name" value="{{ restaurant.owner_name }}" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 px-3 py-2">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <div>
+              <label for="address" class="block font-semibold">Address:</label>
+              <input id="address" name="address" value="{{ restaurant.address }}" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 px-3 py-2">
+            </div>
+            <div>
+              <label for="phone_number" class="block font-semibold">Phone Number:</label>
+              <input id="phone_number" name="phone_number" value="{{ restaurant.phone_number }}" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 px-3 py-2">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <div>
+              <label for="pincode" class="block font-semibold">Pincode:</label>
+              <input id="pincode" name="pincode" value="{{ restaurant.pincode }}" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 px-3 py-2">
+            </div>
+            <div class="flex justify-end items-center">
+              <form action="{% url 'food_model:admin_views' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ restaurant.id }}">
+                {% if restaurant.status == 'approved' %}
+                  <button type="submit" name="action" value="reject" class="px-4 py-2 bg-red-500 text-white rounded-md">Reject</button>
+                {% else %}
+                  <button type="submit" name="action" value="approve" class="px-4 py-2 bg-green-500 text-white rounded-md">Approve</button>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopOwner Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <h1 class="mb-6 text-3xl">Restaurant Registration.</h1>
+
+<form action="." method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="container p-16">
+    {{ form.as_p }}
+  </div>
+
+  {% if form.errors or form.non_field_error %}
+    <div class="mb-3 p-6 bg-red-100 rounded-xl">
+      {% for field in form %}
+        {{ field.errors }}
+      {% endfor %}
+
+      {{ form.non_field_error }}
+    </div>
+  {% endif %}
+
+  <button type="submit" class="py-4 px-8 text-lg  ml-12 bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+</form>
+
+<div class="mt-15 container px-16 py-8">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae labore quia error deleniti dicta distinctio corporis reprehenderit facere commodi sequi laudantium rerum maiores nam, dolorem optio, alias culpa quidem facilis.
+  Accusamus vitae sed quas natus rem, doloremque amet non, quo nihil cupiditate laudantium libero error, qui unde dolores? Amet dolorem sequi ratione maxime. Cupiditate ab sunt natus nobis cum inventore.
+  Ullam nostrum et reiciendis. Sapiente blanditiis optio est, quisquam magnam odio explicabo, officia assumenda eum ratione eaque sit eius asperiores harum, non modi. Minus incidunt dolor voluptate excepturi fugit voluptas!
+</div>
+<div class="container px-16 py-8">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eum cumque laudantium quos voluptatem nemo sunt, nobis cum omnis dolores, itaque ipsam explicabo neque porro dolor deleniti suscipit dolore id.
+  Deleniti perspiciatis similique esse dignissimos facilis! Accusantium sint doloribus tempore quae, eos, placeat eligendi cum voluptas quaerat, laboriosam odio a numquam deserunt hic. Ex quas suscipit temporibus voluptate sapiente molestiae?
+</div>
+
+<div class="container px-12 mb-4">
+  <a href="{% url 'food_model:restaurant_view' %}"><button class="mt-4 p-4 rounded-xl text-lg bg-teal-500 text-white">Restaurant view</button></a>
+</div>
+</body>
+</html>

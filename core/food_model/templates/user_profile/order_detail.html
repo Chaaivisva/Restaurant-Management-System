@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="max-w-4xl mx-auto p-8">
+      <h1 class="text-3xl font-bold mb-6">User Order Detail</h1>
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+          <ul>
+            <li class="border-b border-gray-200 py-4 px-6 shadow-xl">
+              <div class="flex justify-between items-center">
+                <div>
+                  {% if last.status == 'accepted' %}
+                  <h2 class="text-lg font-semibold">Your Last Order in: {{ last.restaurant}}</h2>
+                  <p class="text-gray-600">Total Price: Rs.{{ last.total_price }}</p>
+                  <p>Your Order is <span class="text-green-500 font-semibold">Accepted</span></p>
+                  {% elif  last.stauts == 'pending' %}
+                  <h2 class="text-lg font-semibold">Your Last Order in: {{ last.restaurant}}</h2>
+                  <p class="text-gray-600">Total Price: Rs.{{ last.total_price }}</p>
+                  <p>Your Order is <span class="text-orange-500 font-semibold"> Pending</span></p>
+                  {% else %}
+                  <h2 class="text-lg font-semibold">Your Last Order in: {{ last.restaurant}}</h2>
+                  <p class="text-gray-600">Total Price: Rs.{{ last.total_price }}</p>
+                  <p>Your Order is <span class="text-red-500 font-semibold"> Pending</span></p>
+                  {% endif %}
+                </div>
+                <details>
+                  <summary class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">View Details</summary>
+                  <ul class="m-4 p-2">
+                    {% for item in last.items.all %}
+                    <li>{{ item.food_name }} - ${{ item.price }}</li>
+                    <!-- Add more item details as needed -->
+                    {% empty %}
+                    <li>No items in this order</li>
+                    {% endfor %}
+                  </ul>
+                </details>
+              </div>
+            </li>
+              {% for order in user_orders %}
+                  <li class="border-b border-gray-200 py-4 px-6">
+                      <div class="flex justify-between items-center">
+                        {% if order.status == 'accepted' %}
+                          <div>
+                              <h2 class="text-lg font-semibold">Order: {{ order.restaurant}}</h2>
+                              <p class="text-gray-600">Total Price: Rs.{{ order.total_price }}</p>
+                              <p>Your Order is <span class="text-green-500 font-semibold">Accepted</span></p>
+                          </div>
+                          <details>
+                            <summary class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">View Details</summary>
+                            <ul class="m-4 p-2">
+                              {% for item in order.items.all %}
+                              <li>{{ item.food_name }} - ${{ item.price }}</li>
+                              <!-- Add more item details as needed -->
+                              {% empty %}
+                              <li>No items in this order</li>
+                              {% endfor %}
+                            </ul>
+                          </det ails>
+                        {% elif order.stauts == 'pending' %}
+                          <div >
+                            <h2 class="text-lg font-semibold">Order: {{ order.restaurant}}</h2>
+                            <p class="text-gray-600">Total Price: Rs.{{ order.total_price }}</p>
+                            <p>Your Order is <span class="text-orange-500 font-semibold"> Pending</span></p>
+                          </div>
+                          <a href="#" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View Details</a>
+                        {% else %}
+                        <div >
+                          <h2 class="text-lg font-semibold">Order: {{ order.restaurant}}</h2>
+                          <p class="text-gray-600">Total Price: Rs.{{ order.total_price }}</p>
+                          <p>Your Order is <span class="text-red-500 font-semibold"> Rejected</span></p>
+                        </div>
+                        {% endif %}
+                      </div>
+                  </li>
+              {% empty %}
+                  <li class="py-4 px-6 text-gray-600">No orders found</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+</body>
+</html>

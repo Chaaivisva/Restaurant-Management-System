@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Item dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Menu Items</h2>
+    <a href="/addfooditem"><button type="button" class="p-2 rounded-xl bg-orange-300">Add Food Item</button></a>
+      <div class="container">
+
+      <div class="grid grid-cols-3 gap-6">
+        
+        {% for item in food_items %}
+        <div>
+            <div class="rounded-xl p-4 bg-white mt-10">
+              <img src="{{ item.image.url }}" alt="{{ item.image.url }}" class="rounded-3xl flex items-center ml-8">
+              <div class="rounded-xl ml-4 p-4 col-end">
+                <h4 class="mb-4" id="piz{{ item.id }}">{{ item.food_name }}</h4>
+                <p class="text-gray-700 text-sm">
+                  <strong class="text-gray-500" name="{{item.id}}" value="{{ item.price }}">Price: Rs.{{ item.price}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                </p>
+                <p><strong class="text-gray-500">Ratings:  {{ item.rating }}</strong></p>
+                {% if item.is_sold == True %}
+                  <p class="text-gray-500">Item is empty.</p>
+                {% else %}
+                  <p class="text-gray-500">Item is not empty.</p>
+                {% endif %}
+              </div>
+              <a href="{% url 'food_model:delete_food_item' item.id %}" class="flex bg-red-400 p-2 rounded-xl shadow-xl justify-center">Delete</a>
+              <a href="{% url 'food_model:edit_food_item' item.id %}" class="flex mt-2 bg-green-400 p-2 rounded-xl shadow-xl justify-center ">Edit</a>
+            </div>
+    
+      </div>
+        {% endfor %}
+        </div>    
+</div>
+  </body>
+</html>

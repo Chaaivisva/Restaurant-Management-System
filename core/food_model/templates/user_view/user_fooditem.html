@@ -1,0 +1,30 @@
+{% extends 'food_model/base.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="grid grid-cols-3 gap-4 mt-28">
+  {% for item in food_items %}
+    <div class="rounded-xl shadow-lg p-4 hover:bg-gray-100">
+      <img src="{{ item.image.url }}" alt="{{ item.image.url }}" class="rounded-xl ml-2">
+      <div class="rounded-xl p-2 col-end">
+        <h4 class="mb-4">{{ item.food_name }}</h4> 
+        <p class="text-gray-700">
+        <strong><p class="text-gray-700">
+          <input type="checkbox" name="items[]" class="form" value="{{ item.pk }}" >
+         Price: {{ item.price}}</p></strong>
+    
+        <details>
+        <summary class="text-gray-600"><strong class="text-gray-600">Description</strong><br></summary>
+          <p>{{ item.description }}</p>
+        </details>  
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<div class="flex justify-center items-center font-semibold mt-10">
+
+<button type="submit" class="bg-orange-400 p-2 text-white rounded-lg mt-4 mb-4">Place Order <span class="animate-ping transiton duration-500 delay-500"> ! </span></button>
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'food_model/base.html' %}
+
+{% bolck content %}
+
+{% for rest in restaurants %}
+  {{ rest.restaurant_name }}
+{% endfor %}
+
+{% endblock %}

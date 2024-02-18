@@ -1,0 +1,23 @@
+{% extends 'food_model/base.html' %}
+
+{% block content %}
+<div class="w-full md:w-1/2 mx-auto p-6 bg-gray-100 rounded-xl shadow-md mt-10">
+  {% for prof in profile %}
+    <h1 class="text-2xl font-semibold mb-4">Profile</h1>
+    <div class="mb-4">
+      <p><span class="font-semibold">First Name:</span> {{ prof.firstname }}</p>
+      <p><span class="font-semibold">Last Name:</span> {{ prof.lastname }}</p>
+      <p><span class="font-semibold">Address:</span> {{ prof.address }}</p>
+      <p><span class="font-semibold">Phone Number:</span> {{ prof.phonenumber }}</p>
+      <p><span class="font-semibold">Another Phone Number:</span> {{ prof.temp_phonenumber }}</p>
+      <p><span class="font-semibold">Pincode:</span> {{ prof.pincode }}</p>
+      <p><span class="font-semibold">City:</span> {{ prof.city }}</p>
+    </div>
+    <a href="{% url 'food_model:edit_profile_view' prof.id %}" class="block w-full text-center bg-teal-400 hover:bg-teal-500 text-white py-2 px-4 rounded-md font-semibold mb-4">Edit Profile</a>
+  {% endfor %}
+
+  <h1 class="text-2xl font-semibold mb-4">Order Detail</h1>
+  <a href="{% url 'food_model:user_order_detail' %}" class="block w-full text-center bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded-md font-semibold">Order Detail</a>
+</div>
+
+{% endblock %}

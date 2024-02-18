@@ -1,0 +1,14 @@
+{% extends 'food_model/base.html' %}
+{% block title %} Log in {% endblock %}
+
+{% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <h1 class="mb-6 text-3xl">LOGiN</h1>
+  <form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h5>Create an account and then login&nbsp;&nbsp;&nbsp;<a href="{% url 'food_model:register' %}">Signup</a></h5>
+    <button type="submit" value="POST" class="mt-2 bg-orange-400 p-2 rounded-xl">Submit</button>
+  </form>
+</div>
+{% endblock %}
